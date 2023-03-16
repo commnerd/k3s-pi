@@ -1,9 +1,7 @@
 name: test build images
 
 on:
-  push:
-    branches:    
-      - '!main'
+  pull_request:
 
 jobs:
   build:
@@ -20,6 +18,7 @@ jobs:
         run: echo '${{ secrets.DOCKER_PASSWORD }}' | docker login --username '${{ secrets.DOCKER_USERNAME }}' --password-stdin
       - name: build and push images
         run: |
+          cd images;
           BASE_DIR=${PWD};
           for dir in $(ls -d */)
           do
