@@ -1,12 +1,11 @@
 name: build and push images
 
 on:
-  push:
-    branches:
-      - 'main'
+  pull_request:
 
 jobs:
-  build:
+  build-and-push:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
